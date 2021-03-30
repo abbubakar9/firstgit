@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:workday="http://www.mulesoft.org/schema/mule/workday"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/workday http://www.mulesoft.org/schema/mule/workday/current/mule-workday.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7fd9cb5a-2925-4fb0-8726-be055346d910" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mule4-1stFlow" doc:id="81358d4f-ee8c-4c78-85cd-25907a3415ea" >
+		<http:listener doc:name="Listener" doc:id="43777969-3746-4f83-9c5b-88e4c4f45eeb" config-ref="HTTP_Listener_config" path="/mule4"/>
+		<ee:transform doc:name="Transform Message" doc:id="9a79a1a8-7895-42b1-b1a1-27c447ab1c17" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+var sd="ABBU"
+---
+{
+	result:payload.name ++" "++ payload.age,
+	j:sd ++" "++ payload.age,
+	
+	i:payload.name ++ " " ++ sd
+
+}
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
