@@ -11,6 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="mule4-1stFlow" doc:id="81358d4f-ee8c-4c78-85cd-25907a3415ea" >
 		<http:listener doc:name="Listener" doc:id="43777969-3746-4f83-9c5b-88e4c4f45eeb" config-ref="HTTP_Listener_config" path="/mule4"/>
+		<logger level="INFO" doc:name="Logger" doc:id="9c344f46-2e99-4f6a-bb2e-35f2a2daac3f" message="logger added"/>
 		<ee:transform doc:name="Transform Message" doc:id="9a79a1a8-7895-42b1-b1a1-27c447ab1c17" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
